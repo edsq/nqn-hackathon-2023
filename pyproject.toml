@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "nqn-hackathon-2023"
+version = "0.1.0"
+description = ""
+authors = [
+  "Garrett Compton <garrett.compton@wsu.edu>",
+  "Edward Eskew <edward.eskew@wsu.edu>",
+  "Saptarshi Sarkar <saptarshi.sarkar@wsu.edu>",
+  "Kartik Sreedhar <kartik.sreedhar@wsu.edu>",
+]
+readme = "README.md"
+packages = [{include = "nqn_hackathon_2023", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
