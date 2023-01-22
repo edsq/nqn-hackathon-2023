@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Quantum Simulation of the Fermi-Hubbard model with interactions &#8212; NQN Hackathon 2023</title>
+    <title>Introduction &#8212; NQN Hackathon 2023</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,9 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="project_introduction.html" />
+    <link rel="next" title="Quantum Simulation Basics" href="quantum_simulation_basics.html" />
+    <link rel="prev" title="Quantum Simulation of the Fermi-Hubbard model with interactions" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -106,15 +109,15 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Quantum Simulation of the Fermi-Hubbard model with interactions
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="project_introduction.html">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Introduction
   </a>
  </li>
@@ -174,6 +177,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/edsq/nqn-hackathon-2023/main?urlpath=tree/docs/project_introduction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -213,7 +245,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/edsq/nqn-hackathon-2023/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/edsq/nqn-hackathon-2023/issues/new?title=Issue%20on%20page%20%2Fproject_introduction.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -241,7 +273,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/intro.md"
+        <a href="_sources/project_introduction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -252,7 +284,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -278,23 +310,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fermi-hubbard-hamiltonian">
+   Fermi-Hubbard Hamiltonian
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-quantization-and-pauli-matrices">
+   Second-quantization and Pauli matrices
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Quantum Simulation of the Fermi-Hubbard model with interactions</h1>
+                <h1>Introduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fermi-hubbard-hamiltonian">
+   Fermi-Hubbard Hamiltonian
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-quantization-and-pauli-matrices">
+   Second-quantization and Pauli matrices
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -302,15 +381,44 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="quantum-simulation-of-the-fermi-hubbard-model-with-interactions">
-<h1>Quantum Simulation of the Fermi-Hubbard model with interactions<a class="headerlink" href="#quantum-simulation-of-the-fermi-hubbard-model-with-interactions" title="Permalink to this headline">#</a></h1>
-<p>Documentation for the WSU team’s entry into the NQN 2023 Hackathon.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="project_introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quantum_simulation_basics.html">Quantum Simulation Basics</a></li>
-</ul>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p>The Fermi-Hubbard model is an important tool for studying the behavior of fermionic particles in atomic lattices. This has relevance to a variety of physical problems, especially the study of superconductivity and magnetism, and can also model the behavior of atoms suspended in an optical lattice. The objective of our project is to simulate the dynamics of spin-1/2 particles in a Fermi-Hubbard system with a same-site interaction between particles of opposing spin. The simulation shall be performed on a trapped ion quantum computer.</p>
+<section id="fermi-hubbard-hamiltonian">
+<h2>Fermi-Hubbard Hamiltonian<a class="headerlink" href="#fermi-hubbard-hamiltonian" title="Permalink to this headline">#</a></h2>
+<p>The hamiltonian for a Fermi-Hubbard system is</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H} = -J \sum_{j=1}^{L} ({\hat{c}_{j}}^{\dagger}\hat{c}_{j+1} + {\hat{c}_{j+1}}^{\dagger}\hat{c}_{j}) + U \sum_{j=1}^{L} \hat{n}_{j\uparrow} \hat{n}_{j\downarrow}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is the hopping (or tunneling) strength, <span class="math notranslate nohighlight">\(L\)</span> is the number of lattice sites, and <span class="math notranslate nohighlight">\(U\)</span> is the interaction strength for fermions with opposing spin located at the same site. The operators <span class="math notranslate nohighlight">\({\hat{c}_{j}}^{\dagger}\)</span> and <span class="math notranslate nohighlight">\(\hat{c}_{j}\)</span> are second-quantized fermionic creation and annihilation operators. The terms in the first summation over the lattice sites represent the kinetic energy of particles in the model and their motion forward or backward along the lattice. The tunneling strength <span class="math notranslate nohighlight">\(J\)</span> determines the likelihood of a fermion tunneling through the barrier between adjacent lattice sites. The terms in the second summation describe the interaction.</p>
+</section>
+<section id="second-quantization-and-pauli-matrices">
+<h2>Second-quantization and Pauli matrices<a class="headerlink" href="#second-quantization-and-pauli-matrices" title="Permalink to this headline">#</a></h2>
+<p>In order to perform a quantum simulation of this problem on a quantum computer, it is necessary to translate the Hamiltonian into a form expressed using universal quantum gates, which are represented by Pauli matrices. The Pauli matrices are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\sigma}_x = \hat{X} = \left(\begin{matrix} 0 &amp; 1 \\ 1 &amp; 0 \end{matrix}\right), \quad \hat{\sigma}_y = \hat{Y} = \left(\begin{matrix} 0 &amp; -i \\ i &amp; 0 \end{matrix}\right), \quad \hat{\sigma}_z = \hat{Z} = \left(\begin{matrix} 1 &amp; 0 \\ 0 &amp; -1 \end{matrix}\right)
+\end{split}\]</div>
+<p>The second-quantized fermionic operators in the Hamiltonian need to be expressed in terms of these spin matrices. We can attempt to construct them using the Pauli matrices in the following way:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{f}_{j} = \frac{\hat{X_j} + i\hat{Y_j}}{2} = \left( \begin{matrix} 0 &amp; 1 \\ 0 &amp; 0 \end{matrix}\right), \quad {\hat{f}_{j}}^{\dagger} = \frac{\hat{X_j} - i\hat{Y_j}}{2} = \left( \begin{matrix} 0 &amp; 0 \\ 1 &amp; 0\end{matrix}\right)
+\end{split}\]</div>
+<p>The subscript j indicates the lattice site that the operator acts on.</p>
+<p>However, spin operators and fermionic operators don’t share the same commutative and anti-commutative properties. The Pauli spin operators have the following commutation and anti-commutation properties:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{\sigma}_i, \hat{\sigma}_j] = 2i \epsilon_{ijk} \hat{\sigma}_k, \quad \{ \hat{\sigma}_i, \hat{\sigma}_j \} = 2 \delta_{ij} I
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_{ijk}\)</span> is the Levi-Civita tensor, <span class="math notranslate nohighlight">\(\delta_{ij}\)</span> is the Kronecker delta, and <span class="math notranslate nohighlight">\(I\)</span> is the 2x2 identity matrix. The summation over the index k in the first equation is expressed using Einstein notation, for simplicity.</p>
+<p>The fermionic creation and annihilation operators have the following properties:</p>
+<div class="math notranslate nohighlight">
+\[
+\{ \hat{c}_{i}, {\hat{c}_{j}}^{\dagger} \} = \delta_{ij}, \quad \{ \hat{c}_{i}, \hat{c}_{j} \} = 0, \quad \{ {\hat{c}_{i}}^{\dagger}, {\hat{c}_{j}}^{\dagger} \} = 0
+\]</div>
+<p>The fermionic operators for different lattice sites don’t commute, i.e. <span class="math notranslate nohighlight">\([\hat{c}_{i}, {\hat{c}_{j}}^{\dagger}] \neq 0\)</span>, but the spin operators for different sites do. This inconsistency prevents us from making a direct association between the two, and we must make use of a suitable tranformation relation that ensures the anti-symmetry of a fermionic state.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -340,10 +448,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="project_introduction.html" title="next page">
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Quantum Simulation of the Fermi-Hubbard model with interactions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="quantum_simulation_basics.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction</p>
+        <p class="prev-next-title">Quantum Simulation Basics</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
