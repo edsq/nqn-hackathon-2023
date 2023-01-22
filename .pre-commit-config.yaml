@@ -5,7 +5,7 @@ repos:
         name: jupytext
         entry: poetry run jupytext --sync --pipe black
         language: system
-        files: 'notebooks/\.md/.*\.md'
+        files: 'md_notebooks/.*\.md'
       - id: black
         name: black
         entry: poetry run black
