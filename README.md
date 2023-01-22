@@ -2,6 +2,8 @@
 
 The Washington State University team's submission to the NQN Hackathon.
 
+[Read the documentation here.](https://edsq.github.io/nqn-hackathon-2023)
+
 
 ## Development Installation
 
