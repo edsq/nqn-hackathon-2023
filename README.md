@@ -15,7 +15,7 @@ pipx install poetry
 conda create --name nqn-2023 python=3.9
 conda activate nqn-2023
 ```
-If you have python 3.9+ available already at the system (e.g. through [pyenv](https://github.com/pyenv/pyenv)), you can avoid using conda, and let PDM handle the environment management.
+If you have python 3.9+ available already at the system level (e.g. through [pyenv](https://github.com/pyenv/pyenv)), you can avoid using conda, and let poetry handle the environment management.
 
 2. Install the package:
 ```
