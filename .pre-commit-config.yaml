@@ -1,13 +1,13 @@
 repos:
   - repo: local
     hooks:
-      - id: black
-        name: black
-        entry: poetry run black
-        language: system
-        types: [python]
       - id: jupytext
         name: jupytext
         entry: poetry run jupytext --sync --pipe black
+        language: system
+        files: 'notebooks/\.md/.*\.md'
+      - id: black
+        name: black
+        entry: poetry run black
         language: system
         types: [python]
