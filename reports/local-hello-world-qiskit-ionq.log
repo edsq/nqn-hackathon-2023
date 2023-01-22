@@ -1,0 +1,44 @@
+Traceback (most recent call last):
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/Ed/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+backend = provider.get_backend("ionq.qpu")
+cost = backend.estimate_cost(circuit, shots=100)
+print(f"Estimated cost: {cost.estimated_total} {cost.currency_code}")
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mQiskitBackendNotFoundError[0m                Traceback (most recent call last)
+Cell [0;32mIn[6], line 1[0m
+[0;32m----> 1[0m backend [38;5;241m=[39m [43mprovider[49m[38;5;241;43m.[39;49m[43mget_backend[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mionq.qpu[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[1;32m      2[0m cost [38;5;241m=[39m backend[38;5;241m.[39mestimate_cost(circuit, shots[38;5;241m=[39m[38;5;241m100[39m)
+[1;32m      3[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mEstimated cost: [39m[38;5;132;01m{[39;00mcost[38;5;241m.[39mestimated_total[38;5;132;01m}[39;00m[38;5;124m [39m[38;5;132;01m{[39;00mcost[38;5;241m.[39mcurrency_code[38;5;132;01m}[39;00m[38;5;124m"[39m)
+
+File [0;32m~/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/qiskit_aer/aerprovider.py:62[0m, in [0;36mAerProvider.get_backend[0;34m(self, name, **kwargs)[0m
+[1;32m     61[0m [38;5;28;01mdef[39;00m [38;5;21mget_backend[39m([38;5;28mself[39m, name[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[0;32m---> 62[0m     [38;5;28;01mreturn[39;00m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mget_backend[49m[43m([49m[43mname[49m[38;5;241;43m=[39;49m[43mname[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/qiskit/providers/provider.py:55[0m, in [0;36mProviderV1.get_backend[0;34m(self, name, **kwargs)[0m
+[1;32m     53[0m     [38;5;28;01mraise[39;00m QiskitBackendNotFoundError([38;5;124m"[39m[38;5;124mMore than one backend matches the criteria[39m[38;5;124m"[39m)
+[1;32m     54[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m backends:
+[0;32m---> 55[0m     [38;5;28;01mraise[39;00m QiskitBackendNotFoundError([38;5;124m"[39m[38;5;124mNo backend matches the criteria[39m[38;5;124m"[39m)
+[1;32m     57[0m [38;5;28;01mreturn[39;00m backends[[38;5;241m0[39m]
+
+[0;31mQiskitBackendNotFoundError[0m: 'No backend matches the criteria'
+QiskitBackendNotFoundError: 'No backend matches the criteria'
+

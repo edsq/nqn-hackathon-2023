@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>👋🌍 Hello, world: Submit a Qiskit job to IonQ &#8212; NQN Hackathon 2023</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Example notebook" href="example_notebook.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/nqn_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">NQN Hackathon 2023</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    NQN Hackathon 2023
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="example_notebook.html">
+   Example notebook
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   👋🌍 Hello, world: Submit a Qiskit job to IonQ
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/edsq/nqn-hackathon-2023/main?urlpath=tree/docs/local-hello-world-qiskit-ionq.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/edsq/nqn-hackathon-2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/edsq/nqn-hackathon-2023/issues/new?title=Issue%20on%20page%20%2Flocal-hello-world-qiskit-ionq.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/local-hello-world-qiskit-ionq.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submit-a-simple-job-to-ionq-using-azure-quantum">
+   Submit a simple job to IonQ using Azure Quantum
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connect-to-the-azure-quantum-workspace">
+     1. Connect to the “Azure Quantum workspace”
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#do-you-see-ionq-simulator-in-your-list-of-targets-if-so-you-re-ready-to-keep-going">
+     ❕ Do you see
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       ionq.simulator
+      </span>
+     </code>
+     in your list of targets? If so, you’re ready to keep going.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ionq-the-quantum-provider">
+   IonQ: The quantum provider
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-quantum-program">
+     2. Build the quantum program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#submit-the-quantum-program-to-ionq">
+     3. Submit the quantum program to IonQ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#obtain-the-job-results">
+     4. Obtain the job results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-costs">
+     5. Estimate costs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#next-steps">
+     6. Next steps
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>👋🌍 Hello, world: Submit a Qiskit job to IonQ</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submit-a-simple-job-to-ionq-using-azure-quantum">
+   Submit a simple job to IonQ using Azure Quantum
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connect-to-the-azure-quantum-workspace">
+     1. Connect to the “Azure Quantum workspace”
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#do-you-see-ionq-simulator-in-your-list-of-targets-if-so-you-re-ready-to-keep-going">
+     ❕ Do you see
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       ionq.simulator
+      </span>
+     </code>
+     in your list of targets? If so, you’re ready to keep going.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ionq-the-quantum-provider">
+   IonQ: The quantum provider
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-quantum-program">
+     2. Build the quantum program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#submit-the-quantum-program-to-ionq">
+     3. Submit the quantum program to IonQ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#obtain-the-job-results">
+     4. Obtain the job results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-costs">
+     5. Estimate costs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#next-steps">
+     6. Next steps
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="hello-world-submit-a-qiskit-job-to-ionq">
+<h1>👋🌍 Hello, world: Submit a Qiskit job to IonQ<a class="headerlink" href="#hello-world-submit-a-qiskit-job-to-ionq" title="Permalink to this headline">#</a></h1>
+<p>In this notebook, we’ll review the basics of Azure Quantum by submitting a simple <em>job</em>, or quantum program, to <a class="reference external" href="https://ionq.com/">IonQ</a>. We will use <a class="reference external" href="https://qiskit.org/">Qiskit</a> to express the quantum job.</p>
+<section id="submit-a-simple-job-to-ionq-using-azure-quantum">
+<h2>Submit a simple job to IonQ using Azure Quantum<a class="headerlink" href="#submit-a-simple-job-to-ionq-using-azure-quantum" title="Permalink to this headline">#</a></h2>
+<p>Azure Quantum provides several ways to express quantum programs. In this example we are using Qiskit, but note that Q# and Cirq are also supported. All code in this example will be written in Python.</p>
+<p>Let’s begin. When you see a code block, hover over it and click the triangle play-button to execute it. To avoid any compilation issues, this should be done in order from top to bottom.</p>
+<section id="connect-to-the-azure-quantum-workspace">
+<h3>1. Connect to the “Azure Quantum workspace”<a class="headerlink" href="#connect-to-the-azure-quantum-workspace" title="Permalink to this headline">#</a></h3>
+<p>To connect to the Azure Quantum service, construct an instance of the <code class="docutils literal notranslate"><span class="pre">AzureQuantumProvider</span></code>. Note that it’s imported from <code class="docutils literal notranslate"><span class="pre">azure.quantum.qiskit</span></code>.</p>
+<p>Because we don’t have access to the azure workspace on our local machine, we’ll fake it using <code class="docutils literal notranslate"><span class="pre">AerProvider</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from azure.quantum.qiskit import AzureQuantumProvider</span>
+<span class="c1"># provider = AzureQuantumProvider (</span>
+<span class="c1">#     resource_id = &quot;/subscriptions/e3f1c7eb-35db-4138-9a6d-6cc8455e4e3c/resourceGroups/AzureQuantum/providers/Microsoft.Quantum/Workspaces/nqn-winter-hackathon-2023&quot;,</span>
+<span class="c1">#     location = &quot;westus&quot;</span>
+<span class="c1"># )</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer</span> <span class="kn">import</span> <span class="n">AerProvider</span> <span class="k">as</span> <span class="n">AzureQuantumProvider</span>
+
+<span class="c1"># from qiskit_ionq.ionq_provider import IonQProvider as AzureQuantumProvider</span>
+<span class="n">provider</span> <span class="o">=</span> <span class="n">AzureQuantumProvider</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see what providers and targets are enabled in this workspace with the following command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This workspace&#39;s targets:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- &quot;</span> <span class="o">+</span> <span class="n">backend</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This workspace&#39;s targets:
+- aer_simulator
+- aer_simulator_statevector
+- aer_simulator_density_matrix
+- aer_simulator_stabilizer
+- aer_simulator_matrix_product_state
+- aer_simulator_extended_stabilizer
+- aer_simulator_unitary
+- aer_simulator_superop
+- qasm_simulator
+- statevector_simulator
+- unitary_simulator
+- pulse_simulator
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="do-you-see-ionq-simulator-in-your-list-of-targets-if-so-you-re-ready-to-keep-going">
+<h3>❕ Do you see <code class="docutils literal notranslate"><span class="pre">ionq.simulator</span></code> in your list of targets? If so, you’re ready to keep going.<a class="headerlink" href="#do-you-see-ionq-simulator-in-your-list-of-targets-if-so-you-re-ready-to-keep-going" title="Permalink to this headline">#</a></h3>
+<p>Don’t see it? You may need to add IonQ to your workspace to run this sample. Navigate to the <strong>Providers</strong> page in the portal and click <strong>+Add</strong> to add the IonQ provider. Don’t worry, there’s a free credits plan available.</p>
+</section>
+</section>
+<section id="ionq-the-quantum-provider">
+<h2>IonQ: The quantum provider<a class="headerlink" href="#ionq-the-quantum-provider" title="Permalink to this headline">#</a></h2>
+<p>Azure Quantum partners with third-party companies to deliver solutions to quantum jobs. These company offerings are called <em>providers</em>. Each provider can offer multiple <em>targets</em> with different capabilities. See the table below for IonQ’s targets.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Target name</p></th>
+<th class="head"><p>Target ID</p></th>
+<th class="head"><p>Number of qubits</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Quantum simulator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ionq.simulator</span></code></p></td>
+<td><p>29 qubits</p></td>
+<td><p>IonQ’s cloud-based idealized simulator. Free of cost.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Aria 1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ionq.qpu.aria-1</span></code></p></td>
+<td><p>23 qubits</p></td>
+<td><p>IonQ’s Aria 1 trapped-ion quantum computer. This is real quantum hardware, not a simulation.</p></td>
+</tr>
+<tr class="row-even"><td><p>Quantum computer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ionq.qpu</span></code></p></td>
+<td><p>11 qubits</p></td>
+<td><p>IonQ’s trapped-ion quantum computer. This is real quantum hardware, not a simulation.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For this example, we will use <code class="docutils literal notranslate"><span class="pre">ionq.simulator</span></code>. To learn more about IonQ’s targets, check out our <a class="reference external" href="https://docs.microsoft.com/azure/quantum/provider-ionq">documentation</a>.</p>
+<section id="build-the-quantum-program">
+<h3>2. Build the quantum program<a class="headerlink" href="#build-the-quantum-program" title="Permalink to this headline">#</a></h3>
+<p>Let’s create a simple Qiskit circuit to run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a quantum circuit acting on a single qubit</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Single qubit random&quot;</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Print out the circuit</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">     ┌───┐┌─┐
+  q: ┤ H ├┤M├
+     └───┘└╥┘
+c: 1/══════╩═
+           0 </pre></div></div>
+</div>
+<p>The circuit you built is a simple quantum random bit generator. With IonQ’s idealized simulator, we will be able to calculate the probability of measuring a <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</section>
+<section id="submit-the-quantum-program-to-ionq">
+<h3>3. Submit the quantum program to IonQ<a class="headerlink" href="#submit-the-quantum-program-to-ionq" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an object that represents IonQ&#39;s simulator target, &quot;ionq.simulator&quot;.</span>
+<span class="c1">#   Note that any target you have enabled in this workspace can</span>
+<span class="c1">#   be used here. Azure Quantum makes it extremely easy to submit</span>
+<span class="c1">#   the same quantum program to different providers.</span>
+<span class="c1"># Because we don&#39;t have the IonQ target on our local machine, use the aer_simulator</span>
+<span class="c1"># ionq_simulator_backend = provider.get_backend(&quot;ionq.simulator&quot;)</span>
+<span class="n">ionq_simulator_backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s2">&quot;aer_simulator&quot;</span><span class="p">)</span>
+
+<span class="c1"># Using the IonQ simulator target, call &quot;run&quot; to submit the job. We&#39;ll</span>
+<span class="c1"># use 100 shots (simulated runs).</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">ionq_simulator_backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># print(&quot;Job id:&quot;, job.id())  # The Aer simulator doesn&#39;t have job ids</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The job ID can be used to retrieve the results later using the <a class="reference external" href="https://docs.microsoft.com/azure/quantum/optimization-job-reference#jobdetails">get_details function</a> or by viewing it under the <strong>Job management</strong> section of the portal.</p>
+</section>
+<section id="obtain-the-job-results">
+<h3>4. Obtain the job results<a class="headerlink" href="#obtain-the-job-results" title="Permalink to this headline">#</a></h3>
+<p>You can monitor the job status with Qiskit’s <code class="docutils literal notranslate"><span class="pre">job_monitor</span></code> function.</p>
+<p>This may take a minute or so ⏳. Your job will be packaged and sent to IonQ, where it will wait its turn to be run. You’ll see your job go through these stages: “job is queued” -&gt; “job is actively running” -&gt; “job has successfully run.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="c1"># The result object is native to the Qiskit package, so we can use Qiskit&#39;s tools to print the result as a histogram.</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Result&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Job Status: job has successfully run
+</pre></div>
+</div>
+<img alt="_images/local-hello-world-qiskit-ionq_15_1.png" src="_images/local-hello-world-qiskit-ionq_15_1.png" />
+</div>
+</div>
+<p><strong>See the histogram above? Congratulations, you’ve submitted a job with Azure Quantum! 👏</strong></p>
+</section>
+<section id="estimate-costs">
+<h3>5. Estimate costs<a class="headerlink" href="#estimate-costs" title="Permalink to this headline">#</a></h3>
+<p>To estimate the costs of running this program on a simulator or hardware, you can use the <code class="docutils literal notranslate"><span class="pre">backend.estimate_cost</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s2">&quot;ionq.qpu&quot;</span><span class="p">)</span>
+<span class="n">cost</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">estimate_cost</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated cost: </span><span class="si">{</span><span class="n">cost</span><span class="o">.</span><span class="n">estimated_total</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">cost</span><span class="o">.</span><span class="n">currency_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">QiskitBackendNotFoundError</span><span class="g g-Whitespace">                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s2">&quot;ionq.qpu&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">estimate_cost</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated cost: </span><span class="si">{</span><span class="n">cost</span><span class="o">.</span><span class="n">estimated_total</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">cost</span><span class="o">.</span><span class="n">currency_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/qiskit_aer/aerprovider.py:62,</span> in <span class="ni">AerProvider.get_backend</span><span class="nt">(self, name, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">62</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/nqn-2023/lib/python3.9/site-packages/qiskit/providers/provider.py:55,</span> in <span class="ni">ProviderV1.get_backend</span><span class="nt">(self, name, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span>     <span class="k">raise</span> <span class="n">QiskitBackendNotFoundError</span><span class="p">(</span><span class="s2">&quot;More than one backend matches the criteria&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">backends</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">55</span>     <span class="k">raise</span> <span class="n">QiskitBackendNotFoundError</span><span class="p">(</span><span class="s2">&quot;No backend matches the criteria&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="k">return</span> <span class="n">backends</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="ne">QiskitBackendNotFoundError</span>: &#39;No backend matches the criteria&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="next-steps">
+<h3>6. Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h3>
+<p>Next, you can try running a program on IonQ’s hardware target. Just replace <code class="docutils literal notranslate"><span class="pre">ionq.simulator</span></code> with <code class="docutils literal notranslate"><span class="pre">ionq.qpu</span></code>. Or try another sample by navigating back to the sample gallery. The same “hello world” sample can be run with different quantum providers by choosing another option in the gallery card drop-down menu. Don’t worry - your work here is automatically saved.</p>
+<p>To learn more about submitting Qiskit circuits to Azure Quantum, review <a class="reference external" href="https://docs.microsoft.com/azure/quantum/quickstart-microsoft-qiskit?pivots=platform-ionq">this documentation</a>.</p>
+<p>To learn more about job pricing, review the <a class="reference external" href="https://docs.microsoft.com/azure/quantum/azure-quantum-job-costs">Azure Quantum documentation on job costs</a>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="example_notebook.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Example notebook</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Garrett Compton, Edward Eskew, Saptarshi Sarkar, Kartik Sreedhar<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
