@@ -5,6 +5,11 @@ The Washington State University team's submission to the NQN Hackathon.
 
 ## Development Installation
 
+0. Clone the repository and `cd` into the project:
+```
+cd nqn-hackathon-2023
+```
+
 1. Create and activate the conda environment for the project:
 ```
 conda env create -f environment.yml
@@ -20,4 +25,9 @@ poetry install
 3. Install the pre-commit hooks:
 ```
 pre-commit install
+```
+
+4. Generate the notebooks from synced markdown files using `jupytext`:
+```
+jupytext --sync md_notebooks/*
 ```
