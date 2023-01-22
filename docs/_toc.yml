@@ -4,5 +4,5 @@
 format: jb-book
 root: intro
 chapters:
-- file: example_notebook
-- file: local-hello-world-qiskit-ionq
+- file: project_introduction
+- file: quantum_simulation_basics
