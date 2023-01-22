@@ -31,3 +31,13 @@ pre-commit install
 ```
 jupytext --sync md_notebooks/*
 ```
+
+## Develoment notes
+- Put all notebooks to be committed in the repository in the `notebooks/` directory
+    - A `jupytext` generated markdown pair file will automatically be generated in `md_notebooks/` - only commit this markdown file, not the `.ipynb` file!
+- If you pull new notebooks from the remote repository, you'll need to run `jupytext --sync md_notebooks/*` again to generate the `*.ipynb` file
+- Try not to add new dependencies without careful consideration
+- Autoformat python files and jupyter notebooks using the `black` command (e.g. `black notebooks/hello_world.ipynb`)
+- If `black` would make changes to a file staged for commit, `pre-commit` will block the commit
+    - If this happens, you can simply re `git add` the files `black` changed and re-commit
+    - Best practice is probably to inspect the changes `black` made with a `git diff` first, however
