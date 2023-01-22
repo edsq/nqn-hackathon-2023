@@ -26,6 +26,7 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 jupyter-book = {git = "https://github.com/executablebooks/jupyter-book.git", rev = "795c4b5c351618d4338b94620afc06c6ab54f148"}
+ghp-import = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 black = {extras = ["jupyter"], version = "^22.12.0"}
