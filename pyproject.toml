@@ -12,7 +12,7 @@ readme = "README.md"
 packages = [{include = "nqn_hackathon_2023", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 
 
 [build-system]
