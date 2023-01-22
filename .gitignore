@@ -5,6 +5,5 @@ dist
 .coverage.*
 .python-version
 docs/_build
-*.ipynb
 *.ipynb-checkpoints/*
 *.swp
