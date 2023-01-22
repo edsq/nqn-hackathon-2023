@@ -13,6 +13,7 @@ packages = [{include = "nqn_hackathon_2023", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+poetry = "1.2.2"  # Ensures poetry knows we've installed it into this environment (via conda)
 jupyter = "^1.0.0"
 jupytext = "^1.14.4"
 matplotlib = "^3.6.3"
@@ -24,7 +25,7 @@ debugpy = "!=1.6.5"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-jupyter-book = "^0.13.1"
+jupyter-book = {git = "https://github.com/executablebooks/jupyter-book.git", rev = "795c4b5c351618d4338b94620afc06c6ab54f148"}
 
 [tool.poetry.group.dev.dependencies]
 black = {extras = ["jupyter"], version = "^22.12.0"}
