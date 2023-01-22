@@ -17,12 +17,13 @@ jupyter:
 Here is an example notebook.
 
 ```python
-print('Hello world!')
+print("Hello world!")
 ```
 
 ```python
 import qiskit
 import qiskit.tools.jupyter
+
 %qiskit_version_table
 ```
 
