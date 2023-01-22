@@ -24,7 +24,7 @@ black = {extras = ["jupyter"], version = "^22.12.0"}
 pre-commit = "^2.21.0"
 
 [tool.jupytext]
-formats = "notebooks///ipynb,notebooks/.md///md"
+formats = "notebooks///ipynb,md_notebooks///md"
 
 [build-system]
 requires = ["poetry-core"]
