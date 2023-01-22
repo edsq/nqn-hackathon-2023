@@ -19,6 +19,7 @@ Some of the simplest (while still interesting) problems involve 1D spin chains o
 
 ```python
 from qiskit import QuantumCircuit
+from qiskit.extensions import Initialize
 from qiskit.visualization import plot_histogram
 from qiskit.tools.monitor import job_monitor
 from qiskit import Aer
@@ -59,6 +60,8 @@ class Circuit:
     Attributes:
     ----------
 
+    psi : numpy.array
+        Initial state vector (default provided).
     Nq : int
         Number of qubits.
     iter_t: int
@@ -67,20 +70,36 @@ class Circuit:
         Rotation angle, calulated by default.
     """
 
-    def __init__(self, Nq=3, iter_t=1, min_inc=None):
+    def __init__(self, psi=None, Nq=3, iter_t=1, min_inc=None):
         self.Nq = Nq
+        if psi is None:
+            psi = np.zeros(Nq)
+            psi[Nq // 2] = 1
+            psi[Nq // 2 + 1] = 1
+        psi = psi / np.linalg.norm(psi)
+        self.psi = psi
         self.t = iter_t - 1
         if min_inc is None:
             min_inc = np.pi * 10 ** (-3)
         self.min_inc = min_inc
 
+    def initialize(self):
+        qc = QuantumCircuit(self.Nq, self.Nq)
+
+        return qc
+
     def get_circuit(self, qc=None):
         """Return circuit for single time step evolution."""
 
         if qc is None:
-            qc = QuantumCircuit(self.Nq, self.Nq)
+            qc = self.initialize()
+            # qc = QuantumCircuit(self.Nq, self.Nq)
+            # init_gate = Initialize(self.psi)
+            # init_gate.label = r'$\psi$'
+            # qc.initialize(self.psi, qc.qubits)
+            # qc.append(init_gate, qc.qubits)
 
-        theta = self.min_inc
+        theta = -self.min_inc
 
         for i in range(self.Nq):
             qc.rx(theta, i)
@@ -106,16 +125,18 @@ class Circuit:
         for i in range(self.t):
             self.get_circuit(qc)
 
+        qc.barrier()
+
         for i in range(self.Nq):
             qc.measure(i, i)
-
+        # qc.measure_all()
         # qc.draw()
 
         return qc
 ```
 
 ```python
-obj = Circuit(Nq=3, iter_t=1)
+obj = Circuit(Nq=16, iter_t=1)
 qc = obj.get_circuit_steps()
 qc.draw("mpl")
 ```
@@ -126,9 +147,25 @@ job = backend.run(circuit, shots=100)
 job_monitor(job)
 
 result = job.result()
+n_res = []
+
+for i in range(obj.Nq):
+    n_res.append(result.get_counts(circuit))
+
+n_res = np.asarray(n_res)
 
 # The result object is native to the Qiskit package, so we can use Qiskit's tools to print the result as a histogram.
 plot_histogram(result.get_counts(circuit), title="Result")
+```
+
+```python
+result_ = []
+for i in range(obj.Nq):
+    result_[i] = n_res
+```
+
+```python
+
 ```
 
 ```python
