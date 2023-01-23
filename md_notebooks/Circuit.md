@@ -70,21 +70,32 @@ class Circuit:
         Rotation angle, calulated by default.
     """
 
-    def __init__(self, psi=None, Nq=3, iter_t=1, min_inc=None):
+    def __init__(
+        self, psi=None, Nq=3, iter_t=1, min_inc=np.pi * 10 ** (-1), U=0.5, J=1.0
+    ):
         self.Nq = Nq
         if psi is None:
-            psi = np.zeros(Nq)
-            psi[Nq // 2] = 1
-            psi[Nq // 2 + 1] = 1
+            psi = np.zeros(2**Nq)
+            psi[2 ** (Nq - 1)] = 1
+            # psi[Nq // 2 + 1] = 1
         psi = psi / np.linalg.norm(psi)
         self.psi = psi
+
         self.t = iter_t - 1
-        if min_inc is None:
-            min_inc = np.pi * 10 ** (-3)
+
         self.min_inc = min_inc
+        self.U = U
+        self.J = J
 
     def initialize(self):
         qc = QuantumCircuit(self.Nq, self.Nq)
+
+        init_gate = Initialize(self.psi)
+        init_gate.label = r"$\psi$"
+        # qc.initialize(self.psi, qc.qubits)
+        qc.append(init_gate, qc.qubits)
+
+        qc.save_statevector(label="psi_i")
 
         return qc
 
@@ -101,19 +112,32 @@ class Circuit:
 
         theta = -self.min_inc
 
+        alpha = theta * self.J
+        beta = theta * self.U
+
         for i in range(self.Nq):
-            qc.rx(theta, i)
-            qc.ry(2 * theta, i)
-            qc.rx(2 * theta, i)
-            qc.ry(2 * theta, i)
-            qc.rx(theta, i)
+            qc.rx(alpha, i)
+            qc.ry(2 * alpha, i)
+            qc.rx(alpha, i)
+            qc.rz(2 * beta, i)
+            qc.rx(alpha, i)
+            qc.ry(2 * alpha, i)
+            qc.rx(alpha, i)
 
         for i in range(1, self.Nq - 1):
-            qc.rx(theta, i)
-            qc.ry(2 * theta, i)
-            qc.rx(2 * theta, i)
-            qc.ry(2 * theta, i)
-            qc.rx(theta, i)
+            qc.rx(alpha, i)
+            qc.ry(2 * alpha, i)
+            qc.rx(alpha, i)
+            qc.rz(2 * beta, i)
+            qc.rx(alpha, i)
+            qc.ry(2 * alpha, i)
+            qc.rx(alpha, i)
+
+        #             qc.rx(theta, i)
+        #             qc.ry(2 * theta, i)
+        #             qc.rx(2 * theta, i)
+        #             qc.ry(2 * theta, i)
+        #             qc.rx(theta, i)
 
         return qc
 
@@ -136,7 +160,7 @@ class Circuit:
 ```
 
 ```python
-obj = Circuit(Nq=16, iter_t=1)
+obj = Circuit(Nq=3, iter_t=1)
 qc = obj.get_circuit_steps()
 qc.draw("mpl")
 ```
@@ -159,10 +183,13 @@ plot_histogram(result.get_counts(circuit), title="Result")
 ```
 
 ```python
-result_ = []
+psi_i_vector = result.data()["psi_i"]
+psi_i_vector.draw("latex")
+```
+
+### result_ = []
 for i in range(obj.Nq):
     result_[i] = n_res
-```
 
 ```python
 
