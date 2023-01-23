@@ -46,9 +46,3 @@
 # $$
 # 
 # The fermionic operators for different lattice sites don't commute, i.e. $[\hat{c}_{i}, {\hat{c}_{j}}^{\dagger}] \neq 0$, but the spin operators for different sites do. This inconsistency prevents us from making a direct association between the two, and we must make use of a suitable tranformation relation that ensures the anti-symmetry of a fermionic state.
-
-# In[ ]:
-
-
-
-
