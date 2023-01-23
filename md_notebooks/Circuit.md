@@ -28,29 +28,6 @@ backend = Aer.get_backend("aer_simulator")
 ```
 
 ```python
-# Create a quantum circuit acting on a single qubit
-circuit = QuantumCircuit(23, 23)
-circuit.name = "Single qubit random"
-circuit.h(0)
-circuit.measure(0, 0)
-
-theta_2 = 0.01
-theta = 2 * theta_2
-i = 5
-
-circuit.rx(theta_2, i)
-circuit.ry(theta, i)
-circuit.rx(theta, i)
-circuit.ry(theta, i)
-circuit.rx(theta_2, i)
-
-# Print out the circuit
-
-circuit.measure(i, i)
-circuit.draw("mpl")
-```
-
-```python
 import numpy as np
 
 
@@ -124,7 +101,16 @@ class Circuit:
             qc.ry(2 * alpha, i)
             qc.rx(alpha, i)
 
-        for i in range(1, self.Nq - 1):
+        for i in range(1, self.Nq // 2 - 1):
+            qc.rx(alpha, i)
+            qc.ry(2 * alpha, i)
+            qc.rx(alpha, i)
+            qc.rz(2 * beta, i)
+            qc.rx(alpha, i)
+            qc.ry(2 * alpha, i)
+            qc.rx(alpha, i)
+
+        for i in range(self.Nq // 2 + 1, self.Nq - 1):
             qc.rx(alpha, i)
             qc.ry(2 * alpha, i)
             qc.rx(alpha, i)
@@ -160,7 +146,7 @@ class Circuit:
 ```
 
 ```python
-obj = Circuit(Nq=3, iter_t=1)
+obj = Circuit(Nq=6, iter_t=1)
 qc = obj.get_circuit_steps()
 qc.draw("mpl")
 ```
@@ -180,6 +166,14 @@ n_res = np.asarray(n_res)
 
 # The result object is native to the Qiskit package, so we can use Qiskit's tools to print the result as a histogram.
 plot_histogram(result.get_counts(circuit), title="Result")
+```
+
+```python
+result.get_counts(circuit)
+```
+
+```python
+
 ```
 
 ```python
