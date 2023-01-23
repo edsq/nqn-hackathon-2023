@@ -126,6 +126,11 @@ const thebe_selector_output = ".output, .cell_output"
    Quantum Simulation Basics
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Circuit.html">
+   Fermi-Hubbard Model
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -342,6 +347,11 @@ title="Print to PDF"
    Second-quantization and Pauli matrices
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-jordan-wigner-transform">
+   The Jordan-Wigner Transform
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -371,6 +381,11 @@ title="Print to PDF"
    Second-quantization and Pauli matrices
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-jordan-wigner-transform">
+   The Jordan-Wigner Transform
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -386,12 +401,12 @@ title="Print to PDF"
 <p>The Fermi-Hubbard model is an important tool for studying the behavior of fermionic particles in atomic lattices. This has relevance to a variety of physical problems, especially the study of superconductivity and magnetism, and can also model the behavior of atoms suspended in an optical lattice. The objective of our project is to simulate the dynamics of spin-1/2 particles in a Fermi-Hubbard system with a same-site interaction between particles of opposing spin. The simulation shall be performed on a trapped ion quantum computer.</p>
 <section id="fermi-hubbard-hamiltonian">
 <h2>Fermi-Hubbard Hamiltonian<a class="headerlink" href="#fermi-hubbard-hamiltonian" title="Permalink to this headline">#</a></h2>
-<p>The hamiltonian for a Fermi-Hubbard system is</p>
+<p>The Hamiltonian for a Fermi-Hubbard system is</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{H} = -J \sum_{j=1}^{L} ({\hat{c}_{j}}^{\dagger}\hat{c}_{j+1} + {\hat{c}_{j+1}}^{\dagger}\hat{c}_{j}) + U \sum_{j=1}^{L} \hat{n}_{j\uparrow} \hat{n}_{j\downarrow}
+\hat{H} = -J \sum_{j, s}^{L} ({\hat{c}_{j,s}}^{\dagger}\hat{c}_{j+1,s} + {\hat{c}_{j+1,s}}^{\dagger}\hat{c}_{j,s}) + U \sum_{j}^{L} \hat{n}_{j,\uparrow} \hat{n}_{j,\downarrow}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(J\)</span> is the hopping (or tunneling) strength, <span class="math notranslate nohighlight">\(L\)</span> is the number of lattice sites, and <span class="math notranslate nohighlight">\(U\)</span> is the interaction strength for fermions with opposing spin located at the same site. The operators <span class="math notranslate nohighlight">\({\hat{c}_{j}}^{\dagger}\)</span> and <span class="math notranslate nohighlight">\(\hat{c}_{j}\)</span> are second-quantized fermionic creation and annihilation operators. The terms in the first summation over the lattice sites represent the kinetic energy of particles in the model and their motion forward or backward along the lattice. The tunneling strength <span class="math notranslate nohighlight">\(J\)</span> determines the likelihood of a fermion tunneling through the barrier between adjacent lattice sites. The terms in the second summation describe the interaction.</p>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is the hopping (or tunneling) strength, <span class="math notranslate nohighlight">\(L\)</span> is the number of lattice sites, and <span class="math notranslate nohighlight">\(U\)</span> is the interaction strength for fermions with opposing spin located at the same site. The index s tracks the spin of the operators. The operators <span class="math notranslate nohighlight">\({\hat{c}_{j}}^{\dagger}\)</span> and <span class="math notranslate nohighlight">\(\hat{c}_{j}\)</span> are second-quantized fermionic creation and annihilation operators. The terms in the first summation over the lattice sites represent the kinetic energy of particles in the model and their motion forward or backward along the lattice. The tunneling strength <span class="math notranslate nohighlight">\(J\)</span> is an overlap integral of adjacent orbitals in the lattice which determines the likelihood of a fermion tunneling through the potential barrier between adjacent lattice sites. The terms in the second summation describe the Coulomb interaction. The interaction strength <span class="math notranslate nohighlight">\(U\)</span> is formally a two body integral accounting for Coulomb repulsion and spin-spin interaction.</p>
 </section>
 <section id="second-quantization-and-pauli-matrices">
 <h2>Second-quantization and Pauli matrices<a class="headerlink" href="#second-quantization-and-pauli-matrices" title="Permalink to this headline">#</a></h2>
@@ -418,6 +433,25 @@ title="Print to PDF"
 \{ \hat{c}_{i}, {\hat{c}_{j}}^{\dagger} \} = \delta_{ij}, \quad \{ \hat{c}_{i}, \hat{c}_{j} \} = 0, \quad \{ {\hat{c}_{i}}^{\dagger}, {\hat{c}_{j}}^{\dagger} \} = 0
 \]</div>
 <p>The fermionic operators for different lattice sites don’t commute, i.e. <span class="math notranslate nohighlight">\([\hat{c}_{i}, {\hat{c}_{j}}^{\dagger}] \neq 0\)</span>, but the spin operators for different sites do. This inconsistency prevents us from making a direct association between the two, and we must make use of a suitable tranformation relation that ensures the anti-symmetry of a fermionic state.</p>
+</section>
+<section id="the-jordan-wigner-transform">
+<h2>The Jordan-Wigner Transform<a class="headerlink" href="#the-jordan-wigner-transform" title="Permalink to this headline">#</a></h2>
+<p>One such transformation that can be used is the Jordan-Wigner tranformation, given by</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{c}_j = e^{\left( -i\pi\sum_{k=1}^{j-1} {\hat{f}_k}^{\dagger} \hat{f}_k \right)} \hat{f}_j, \quad {\hat{c}_j}^{\dagger} = e^{\left( +i\pi\sum_{k=1}^{j-1} {\hat{f}_k}^{\dagger} \hat{f}_k \right)} {\hat{f}_j}^{\dagger}, \quad {\hat{c}_j}^{\dagger} \hat{c}_j = {\hat{f}_j}^{\dagger} \hat{f}_j
+\]</div>
+<p>The number operators are equal in terms of both spin and fermionic operators.</p>
+<p>We can expand the exponents in the transformation equations and express them in the following form that is suitable for conversion into a quantum circuit:</p>
+<div class="math notranslate nohighlight">
+\[
+e^{\left( \pm i\pi\sum_{k=1}^{j-1} {\hat{f}_k}^{\dagger} \hat{f}_k \right)} = \prod_{k=1}^{j-1} \left( -\hat{Z}_k \right)
+\]</div>
+<p>This transformation enforces the anti-symmetry of the fermionic states and the Hamiltonian can now be expressed in terms of the quantum gates <span class="math notranslate nohighlight">\(\hat{X}\)</span>, <span class="math notranslate nohighlight">\(\hat{Y}\)</span> and <span class="math notranslate nohighlight">\(\hat{Z}\)</span>. Expanding the Hamiltonian in terms of these operators, and making use of suitable identities for the Pauli operators, we eventually get</p>
+<div class="math notranslate nohighlight">
+\[
+H = \sum_{j,\sigma} -J(a^\dagger_{j,s}a_{j+1,s} + a^\dagger_{j+1,s}a_{j,s}) + Un_{j,\downarrow}n_{j,\uparrow} = \sum_{j,s} \frac{J}{2}(X_{j,s}X_{j+1,s} + Y_{j,s}Y_{j+1,\sigma}) + \frac{U}{4}(1- Z_{j,\uparrow} - Z_{j,\downarrow} + Z_{j,\uparrow}Z_{j,\downarrow})
+\]</div>
 </section>
 </section>
 

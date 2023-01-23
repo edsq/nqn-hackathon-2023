@@ -7,13 +7,13 @@
 
 # ## Fermi-Hubbard Hamiltonian
 # 
-# The hamiltonian for a Fermi-Hubbard system is
+# The Hamiltonian for a Fermi-Hubbard system is
 # 
 # $$
-# \hat{H} = -J \sum_{j=1}^{L} ({\hat{c}_{j}}^{\dagger}\hat{c}_{j+1} + {\hat{c}_{j+1}}^{\dagger}\hat{c}_{j}) + U \sum_{j=1}^{L} \hat{n}_{j\uparrow} \hat{n}_{j\downarrow}
+# \hat{H} = -J \sum_{j, s}^{L} ({\hat{c}_{j,s}}^{\dagger}\hat{c}_{j+1,s} + {\hat{c}_{j+1,s}}^{\dagger}\hat{c}_{j,s}) + U \sum_{j}^{L} \hat{n}_{j,\uparrow} \hat{n}_{j,\downarrow}
 # $$
 # 
-# where $J$ is the hopping (or tunneling) strength, $L$ is the number of lattice sites, and $U$ is the interaction strength for fermions with opposing spin located at the same site. The operators ${\hat{c}_{j}}^{\dagger}$ and $\hat{c}_{j}$ are second-quantized fermionic creation and annihilation operators. The terms in the first summation over the lattice sites represent the kinetic energy of particles in the model and their motion forward or backward along the lattice. The tunneling strength $J$ determines the likelihood of a fermion tunneling through the barrier between adjacent lattice sites. The terms in the second summation describe the interaction.
+# where $J$ is the hopping (or tunneling) strength, $L$ is the number of lattice sites, and $U$ is the interaction strength for fermions with opposing spin located at the same site. The index s tracks the spin of the operators. The operators ${\hat{c}_{j}}^{\dagger}$ and $\hat{c}_{j}$ are second-quantized fermionic creation and annihilation operators. The terms in the first summation over the lattice sites represent the kinetic energy of particles in the model and their motion forward or backward along the lattice. The tunneling strength $J$ is an overlap integral of adjacent orbitals in the lattice which determines the likelihood of a fermion tunneling through the potential barrier between adjacent lattice sites. The terms in the second summation describe the Coulomb interaction. The interaction strength $U$ is formally a two body integral accounting for Coulomb repulsion and spin-spin interaction.
 
 # ## Second-quantization and Pauli matrices
 # 
@@ -46,3 +46,30 @@
 # $$
 # 
 # The fermionic operators for different lattice sites don't commute, i.e. $[\hat{c}_{i}, {\hat{c}_{j}}^{\dagger}] \neq 0$, but the spin operators for different sites do. This inconsistency prevents us from making a direct association between the two, and we must make use of a suitable tranformation relation that ensures the anti-symmetry of a fermionic state.
+
+# ## The Jordan-Wigner Transform
+# 
+# One such transformation that can be used is the Jordan-Wigner tranformation, given by
+# 
+# $$
+# \hat{c}_j = e^{\left( -i\pi\sum_{k=1}^{j-1} {\hat{f}_k}^{\dagger} \hat{f}_k \right)} \hat{f}_j, \quad {\hat{c}_j}^{\dagger} = e^{\left( +i\pi\sum_{k=1}^{j-1} {\hat{f}_k}^{\dagger} \hat{f}_k \right)} {\hat{f}_j}^{\dagger}, \quad {\hat{c}_j}^{\dagger} \hat{c}_j = {\hat{f}_j}^{\dagger} \hat{f}_j
+# $$
+# 
+# The number operators are equal in terms of both spin and fermionic operators.
+# 
+# We can expand the exponents in the transformation equations and express them in the following form that is suitable for conversion into a quantum circuit:
+# 
+# $$
+# e^{\left( \pm i\pi\sum_{k=1}^{j-1} {\hat{f}_k}^{\dagger} \hat{f}_k \right)} = \prod_{k=1}^{j-1} \left( -\hat{Z}_k \right)
+# $$
+# 
+# This transformation enforces the anti-symmetry of the fermionic states and the Hamiltonian can now be expressed in terms of the quantum gates $\hat{X}$, $\hat{Y}$ and $\hat{Z}$. Expanding the Hamiltonian in terms of these operators, and making use of suitable identities for the Pauli operators, we eventually get
+# 
+# 
+# $$
+# H = \sum_{j,\sigma} -J(a^\dagger_{j,s}a_{j+1,s} + a^\dagger_{j+1,s}a_{j,s}) + Un_{j,\downarrow}n_{j,\uparrow} = \sum_{j,s} \frac{J}{2}(X_{j,s}X_{j+1,s} + Y_{j,s}Y_{j+1,\sigma}) + \frac{U}{4}(1- Z_{j,\uparrow} - Z_{j,\downarrow} + Z_{j,\uparrow}Z_{j,\downarrow})
+# $$
+# 
+
+# 
+# 

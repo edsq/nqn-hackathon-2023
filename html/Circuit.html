@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Fermi-Hubbard Model &#8212; NQN Hackathon 2023</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Quantum Simulation Basics" href="quantum_simulation_basics.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/nqn_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">NQN Hackathon 2023</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Quantum Simulation of the Fermi-Hubbard model with interactions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="project_introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="quantum_simulation_basics.html">
+   Quantum Simulation Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Fermi-Hubbard Model
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/edsq/nqn-hackathon-2023/main?urlpath=tree/docs/Circuit.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/edsq/nqn-hackathon-2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/edsq/nqn-hackathon-2023/issues/new?title=Issue%20on%20page%20%2FCircuit.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/Circuit.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encoding-the-states-with-qubits">
+   Encoding the states with qubits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extracting-the-particle-density-function-from-qiskit-output">
+   Extracting the Particle Density Function from Qiskit Output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rotating-the-basis-states-for-improved-performance">
+   Rotating the basis states for improved performance
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Fermi-Hubbard Model</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encoding-the-states-with-qubits">
+   Encoding the states with qubits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extracting-the-particle-density-function-from-qiskit-output">
+   Extracting the Particle Density Function from Qiskit Output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rotating-the-basis-states-for-improved-performance">
+   Rotating the basis states for improved performance
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="fermi-hubbard-model">
+<h1>Fermi-Hubbard Model<a class="headerlink" href="#fermi-hubbard-model" title="Permalink to this headline">#</a></h1>
+<p>Some of the simplest (while still interesting) problems involve 1D spin chains or a Hubbard model, either with fermions or bosons. A <a class="reference external" href="https://en.wikipedia.org/wiki/Hubbard_model">Hubbard model</a> For fermions, the Pauli’s exclusion principle ensures that no two of them can have the exact same quantum numbers.</p>
+<section id="encoding-the-states-with-qubits">
+<h2>Encoding the states with qubits<a class="headerlink" href="#encoding-the-states-with-qubits" title="Permalink to this headline">#</a></h2>
+<p>In order to proceed with simulating the system, we need to choose a suitable encoding scheme to represent the state of the system using the available qubits. For a single lattice site, the maximum number of fermions that can occupy it is 2, and this implies that there are a total of 4 possible states at any site (a state with no fermions, a state with an up spin, a state with a down spin, and a state with both up and down spins). This encoding would require 2 qubits per lattice site, which restricts the size of the lattice that can be simulated. A simpler encoding scheme can be implemented by treating the spin-up and spin-down fermions as if they are separate from each other, with the former occupying one L-site lattice, and the latter occupying a copy of the same lattice. In this case, each site can accomodate up to one fermion, which can be represented using a single qubit. Consequently, the Hamiltonian can be expressed as a sum over 2L sites, with the hopping of the spin-up fermions confined to the first L sites, and the hopping for the spin-down particles confined to the remaining L sites.
+$<span class="math notranslate nohighlight">\(
+H = \sum_{j=1}^{L-1} \frac{J}{2}(X_{j}X_{j+1} + Y_{j}Y_{j+1} + X_{j+L}X_{j+1+L} + Y_{j+L}Y_{j+1+L}) + \sum_{j=1}^{L} \frac{U}{4}(1- Z_{j} - Z_{j+L} + Z_{j}Z_{j+L})
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="kn">import</span> <span class="n">job_monitor</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s2">&quot;aer_simulator&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">class</span> <span class="nc">Circuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a circuit for Nq qubits.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    psi : numpy.array</span>
+<span class="sd">        Initial state vector (default provided).</span>
+<span class="sd">    Nq : int</span>
+<span class="sd">        Number of qubits.</span>
+<span class="sd">    iter_t: int</span>
+<span class="sd">        Number of iterations (min=1).</span>
+<span class="sd">    min_inc : float</span>
+<span class="sd">        Rotation angle, calulated by default.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">psi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Nq</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">iter_t</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">U</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nq</span> <span class="o">=</span> <span class="n">Nq</span>
+        <span class="k">if</span> <span class="n">psi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Set the initial state to be a particle halfway on the lattice</span>
+            <span class="c1"># This is represented by the bit string with the half-most significant bit set</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">Nq</span><span class="p">)</span>
+            <span class="n">psi</span><span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">Nq</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">psi</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">psi</span> <span class="o">=</span> <span class="n">psi</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">iter_t</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_inc</span> <span class="o">=</span> <span class="n">min_inc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">U</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="o">=</span> <span class="n">J</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nq</span><span class="p">)</span>
+
+        <span class="n">init_gate</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">psi</span><span class="p">)</span>
+        <span class="n">init_gate</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$\psi$&quot;</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">init_gate</span><span class="p">,</span> <span class="n">qc</span><span class="o">.</span><span class="n">qubits</span><span class="p">)</span>
+
+        <span class="n">qc</span><span class="o">.</span><span class="n">save_statevector</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;psi_i&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">qc</span>
+
+    <span class="k">def</span> <span class="nf">get_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return circuit for single time step evolution.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">qc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">qc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+        <span class="n">theta</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">min_inc</span>
+
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nq</span><span class="p">):</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">beta</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nq</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">beta</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nq</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nq</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">beta</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">qc</span>
+
+    <span class="k">def</span> <span class="nf">get_circuit_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return circuit for t time steps.&quot;&quot;&quot;</span>
+
+        <span class="n">qc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_circuit</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+
+        <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nq</span><span class="p">):</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">qc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">Nq</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">iter_t</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_circuit_steps</span><span class="p">()</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Circuit_5_0.png" src="_images/Circuit_5_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span> <span class="o">=</span> <span class="n">qc</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">n_res</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">Nq</span><span class="p">):</span>
+    <span class="n">n_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span>
+
+<span class="n">n_res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">n_res</span><span class="p">)</span>
+
+<span class="c1"># The result object is native to the Qiskit package, so we can use Qiskit&#39;s tools to print the result as a histogram.</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Result&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Job Status: job has successfully run
+</pre></div>
+</div>
+<img alt="_images/Circuit_6_1.png" src="_images/Circuit_6_1.png" />
+</div>
+</div>
+</section>
+<section id="extracting-the-particle-density-function-from-qiskit-output">
+<h2>Extracting the Particle Density Function from Qiskit Output<a class="headerlink" href="#extracting-the-particle-density-function-from-qiskit-output" title="Permalink to this headline">#</a></h2>
+<p>The output of the evolution is a probability distrubution over the elements of the qbit Hilbert space, collected by measuring the outcome of a series of shots through the quantum computer, each intialized to the same state. To extract the particle density function on the lattice we calculate marginal probability distributions of the encoding. Consider a generic state of a four site lattice
+<span class="math notranslate nohighlight">\(|xxxx,xxxx\rangle\)</span>. The first grouping of qbit states indicate the locations of spin up fermions. The second grouping of qbit states indicate the locations of spin down fermions.
+To calculate the probability of the first lattice point having zero particles, sum over the number of states of the form
+<span class="math notranslate nohighlight">\(|0xxx,0xxx\rangle\)</span>.
+To calculate the probability of the second lattice point having one spin up particle, sum over the number of states of the form <span class="math notranslate nohighlight">\(|x1xx,x0xx\rangle\)</span>.
+We iterate this procedure over each scenario for each lattice point; no particles, one spin up, one spin down, both spin up and spin down.
+Normalizing the distribution, we obtain a time evolved density function over the lattice.</p>
+</section>
+<section id="rotating-the-basis-states-for-improved-performance">
+<h2>Rotating the basis states for improved performance<a class="headerlink" href="#rotating-the-basis-states-for-improved-performance" title="Permalink to this headline">#</a></h2>
+<p>In keeping with the best practices specified by IonQ, we perform a rotation of our basis states before time-evolution so that the operators are expressed primarily as rotations about the z-axis using RZ gates. This is achieved by first applying an RX gate with phase <span class="math notranslate nohighlight">\(\pi/2\)</span> to all the qubits, time-evolving the system, and then applying another RX gate with phase <span class="math notranslate nohighlight">\(-\pi/2\)</span>. This will rotate <span class="math notranslate nohighlight">\(\hat{Y}\)</span> gates into <span class="math notranslate nohighlight">\(\hat{Z}\)</span>, and <span class="math notranslate nohighlight">\(\hat{Z}\)</span> gates into <span class="math notranslate nohighlight">\(-\hat{Y}\)</span>, but since the Hamiltonian uses more <span class="math notranslate nohighlight">\(\hat{X}\)</span> and <span class="math notranslate nohighlight">\(\hat{Y}\)</span> gates than <span class="math notranslate nohighlight">\(\hat{Z}\)</span> gates, the result is a Hamiltonian with mostly <span class="math notranslate nohighlight">\(\hat{Z}\)</span> gates.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="quantum_simulation_basics.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Quantum Simulation Basics</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Garrett Compton, Edward Eskew, Saptarshi Sarkar, Kartik Sreedhar<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
