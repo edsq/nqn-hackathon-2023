@@ -7,9 +7,9 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.14.4
   kernelspec:
-    display_name: Python [conda env:.conda-nqn-2023]
+    display_name: Python 3 (ipykernel)
     language: python
-    name: conda-env-.conda-nqn-2023-py
+    name: python3
 ---
 
 # Fermi-Hubbard Model
@@ -52,9 +52,10 @@ class Circuit:
     ):
         self.Nq = Nq
         if psi is None:
+            # Set the initial state to be a particle halfway on the lattice
+            # This is represented by the bit string with the half-most significant bit set
             psi = np.zeros(2**Nq)
-            psi[2 ** (Nq - 1)] = 1
-            # psi[Nq // 2 + 1] = 1
+            psi[2 ** (Nq // 2)] = 1
         psi = psi / np.linalg.norm(psi)
         self.psi = psi
 
@@ -69,7 +70,6 @@ class Circuit:
 
         init_gate = Initialize(self.psi)
         init_gate.label = r"$\psi$"
-        # qc.initialize(self.psi, qc.qubits)
         qc.append(init_gate, qc.qubits)
 
         qc.save_statevector(label="psi_i")
@@ -81,11 +81,6 @@ class Circuit:
 
         if qc is None:
             qc = self.initialize()
-            # qc = QuantumCircuit(self.Nq, self.Nq)
-            # init_gate = Initialize(self.psi)
-            # init_gate.label = r'$\psi$'
-            # qc.initialize(self.psi, qc.qubits)
-            # qc.append(init_gate, qc.qubits)
 
         theta = -self.min_inc
 
@@ -119,12 +114,6 @@ class Circuit:
             qc.ry(2 * alpha, i)
             qc.rx(alpha, i)
 
-        #             qc.rx(theta, i)
-        #             qc.ry(2 * theta, i)
-        #             qc.rx(2 * theta, i)
-        #             qc.ry(2 * theta, i)
-        #             qc.rx(theta, i)
-
         return qc
 
     def get_circuit_steps(self):
@@ -139,8 +128,6 @@ class Circuit:
 
         for i in range(self.Nq):
             qc.measure(i, i)
-        # qc.measure_all()
-        # qc.draw()
 
         return qc
 ```
@@ -166,33 +153,6 @@ n_res = np.asarray(n_res)
 
 # The result object is native to the Qiskit package, so we can use Qiskit's tools to print the result as a histogram.
 plot_histogram(result.get_counts(circuit), title="Result")
-```
-
-```python
-result.get_counts(circuit)
-```
-
-```python
-
-```
-
-```python
-psi_i_vector = result.data()["psi_i"]
-psi_i_vector.draw("latex")
-```
-
-### result_ = []
-for i in range(obj.Nq):
-    result_[i] = n_res
-
-```python
-
-```
-
-```python
-backend = provider.get_backend("ionq.qpu")
-cost = backend.estimate_cost(circuit, shots=100)
-print(f"Estimated cost: {cost.estimated_total} {cost.currency_code}")
 ```
 
 ```python
